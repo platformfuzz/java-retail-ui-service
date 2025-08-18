@@ -1,0 +1,45 @@
+{
+  "name": "Retail UI Dev",
+  "image": "mcr.microsoft.com/devcontainers/java:17",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "17",
+      "installGradle": "false",
+      "installMaven": "true"
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/scripts/postCreate.sh",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "java.home": "/usr/local/openjdk-17",
+        "java.configuration.updateBuildConfiguration": "automatic"
+      },
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "redhat.java",
+        "vscjava.vscode-java-debug",
+        "vscjava.vscode-java-test",
+        "vscjava.vscode-maven",
+        "vscjava.vscode-java-dependency"
+      ]
+    }
+  },
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  ],
+  "forwardPorts": [8080, 8081],
+  "portsAttributes": {
+    "8080": {
+      "label": "Spring Boot App",
+      "onAutoForward": "notify"
+    },
+    "8081": {
+      "label": "Management Port",
+      "onAutoForward": "notify"
+    }
+  },
+  "remoteUser": "vscode"
+}
